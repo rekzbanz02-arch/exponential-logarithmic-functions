@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#23363c">
+<title>Exponential & Logarithmic Functions Master</title>
+<style>
+:root{
+  --ink:#23363c;--ink2:#17272c;--cream:#f4ece1;--paper:#fffdf9;--gold:#c98c32;
+  --blue:#5f98c8;--text:#25363b;--muted:#697b80;--line:#d9e1df;--green:#18794e;
+  --red:#b4233d;--shadow:0 16px 46px rgba(35,54,60,.13);--radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);background:linear-gradient(135deg,#f2ece3 0%,#f8faf9 52%,#edf4f7 100%)
+}
+button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.shell{max-width:1200px;margin:auto;padding:14px}
+.topbar{
+  position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:11px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,253,249,.94);
+  backdrop-filter:blur(12px);box-shadow:var(--shadow)
+}
+.brand{display:flex;align-items:center;gap:11px}.logo{width:46px;height:46px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:950}
+.brand h1{font-size:1rem;margin:0}.brand small{color:var(--muted)}
+.nav{display:flex;gap:7px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:850;transition:.18s}
+.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.primary{background:var(--ink);color:white}.secondary{background:#e7f0f4;color:var(--ink)}
+.outline{background:#fff;color:var(--text);border:1px solid var(--line)}.warning{background:#fff0cf;color:#76500c}
+.danger{background:#ffe4e8;color:#8e1730}
+.screen{margin-top:18px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.hero-main{
+  min-height:425px;display:flex;flex-direction:column;justify-content:center;
+  background:radial-gradient(circle at 90% 7%,rgba(201,140,50,.22),transparent 24%),
+             radial-gradient(circle at 12% 85%,rgba(95,152,200,.18),transparent 28%),var(--paper)
+}
+.eyebrow{display:inline-flex;width:max-content;padding:7px 11px;border-radius:999px;background:#e8ded0;color:var(--ink);font-size:.8rem;font-weight:900}
+h2{font-size:clamp(2.25rem,6vw,4.8rem);line-height:.97;letter-spacing:-.055em;margin:16px 0 12px}
+h3{margin-top:0}p{line-height:1.65}.muted{color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.chip{padding:7px 10px;border-radius:999px;background:#f3f5f4;border:1px solid var(--line);font-size:.8rem;font-weight:800}
+.count-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.count{padding:13px;border:1px solid var(--line);border-radius:14px;background:#f5f7f6}
+.count span{display:block;color:var(--muted);font-size:.74rem}.count strong{font-size:1.35rem}
+.priority-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.priority{padding:16px;border:1px solid var(--line);border-radius:15px;background:white}
+.priority.high{border-top:5px solid var(--red)}.priority.medium{border-top:5px solid var(--gold)}.priority strong{display:block;margin-bottom:6px}
+details.lesson{margin:12px 0;border:1px solid var(--line);border-radius:17px;overflow:hidden;background:#fff}
+details.lesson>summary{padding:17px 19px;cursor:pointer;list-style:none;font-size:1.08rem;font-weight:900;background:#f7f7f4}
+details.lesson>summary::-webkit-details-marker{display:none}.lesson-body{padding:18px}
+.formula-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.formula{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fbfcfb}
+.formula strong{display:block;color:var(--ink);margin-bottom:7px}.math{font-family:"Cambria Math","Times New Roman",serif;font-size:1.08rem}
+.example{margin-top:9px;padding:10px 12px;background:#eef4f6;border-left:4px solid var(--blue);border-radius:8px}
+.alert{padding:15px;border-radius:14px;border:1px solid #e7c881;background:#fff4dc;line-height:1.6}
+.source-note{padding:15px;border-radius:14px;border:1px solid #efb4bd;background:#fff0f2;line-height:1.6}
+.graph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.graph-card{padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.graph-card svg{width:100%;height:180px;background:#fafafa;border-radius:10px}
+.checklist{display:grid;gap:9px}.checkitem{display:flex;gap:10px;align-items:flex-start;padding:11px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.checkitem input{margin-top:4px;accent-color:var(--ink)}
+.setup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field label{display:block;font-weight:850;margin-bottom:7px}
+select,input[type=text]{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--text);outline:0}
+select:focus,input[type=text]:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(95,152,200,.16)}
+.toggle-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:13px 0}
+.switch{position:relative;width:50px;height:28px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;border-radius:99px;background:#cbd5d7;transition:.2s}
+.slider:before{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;background:#fff;border-radius:50%;box-shadow:0 2px 7px rgba(0,0,0,.2);transition:.2s}
+.switch input:checked+.slider{background:var(--ink)}.switch input:checked+.slider:before{transform:translateX(22px)}
+.quiz-layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px}.sidebar{position:sticky;top:88px;height:max-content}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{padding:12px;border:1px solid var(--line);border-radius:13px;background:#f4f7f6}
+.stat span{display:block;font-size:.72rem;color:var(--muted)}.stat strong{font-size:1.05rem}.timer.danger{color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.palette{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:14px;max-height:365px;overflow:auto}.qnav{min-height:36px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--muted);font-weight:850}
+.qnav.current{border-color:var(--ink);outline:3px solid rgba(35,54,60,.14);color:var(--ink)}.qnav.answered{background:#e2edf0;color:var(--ink);border-color:#a9c9d5}.qnav.flagged{box-shadow:inset 0 -4px 0 var(--gold)}
+.qcard{min-height:540px}.qhead{display:flex;justify-content:space-between;gap:10px;padding-bottom:15px;border-bottom:1px solid var(--line)}
+.tags{display:flex;gap:7px;flex-wrap:wrap}.tag{padding:6px 9px;border-radius:999px;background:#e9eff1;color:var(--ink);font-size:.73rem;font-weight:900}.tag.hot{background:#ffe4e7;color:#991b34}
+.question{font-size:1.3rem;line-height:1.55;margin:24px 0 18px}.options{display:grid;gap:11px}.option{display:flex;gap:11px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.option:hover{border-color:var(--blue);background:#f8fbfc}.option.selected{border-color:var(--ink);background:#eaf1f3;box-shadow:0 0 0 3px rgba(35,54,60,.1)}.option.correct{border-color:#51b486;background:#eaf8f1}.option.wrong{border-color:#e47789;background:#fff0f2}
+.option input{margin-top:4px}.feedback{margin-top:17px;padding:14px;border-radius:14px;line-height:1.55}.feedback.good{background:#e9f9f0;border:1px solid #79cca8;color:#14623f}.feedback.bad{background:#fff0f2;border:1px solid #eda0ad;color:#8b2033}
+.qactions{display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:18px;margin-top:26px}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.score-wrap{text-align:center}.score-ring{--angle:0deg;width:160px;height:160px;border-radius:50%;margin:12px auto;display:grid;place-items:center;background:conic-gradient(var(--ink) var(--angle),#e4e9e8 0);position:relative}
+.score-ring:before{content:"";position:absolute;inset:14px;background:var(--paper);border-radius:50%}.score-ring strong{position:relative;font-size:2.1rem}
+.result-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.breakdown{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.break-row{display:grid;grid-template-columns:145px 1fr 55px;align-items:center;gap:9px;margin:9px 0}.bar{height:10px;background:#e4e9e8;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ink)}
+.review-list{display:grid;gap:12px;margin-top:14px}.review-item{padding:16px;border:1px solid var(--line);border-left:6px solid var(--red);border-radius:14px;background:white}.review-item.good{border-left-color:var(--green)}.review-item h4{margin:0 0 8px;line-height:1.5}.review-item p{margin:5px 0;color:var(--muted);line-height:1.55}
+footer{text-align:center;padding:27px 8px 5px;color:var(--muted);font-size:.83rem}
+@media(max-width:920px){.hero,.quiz-layout{grid-template-columns:1fr}.sidebar{position:static}.palette{grid-template-columns:repeat(10,1fr);max-height:none}.priority-grid,.graph-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.shell{padding:8px}.brand small{display:none}.nav .btn span{display:none}.card{padding:17px}.count-grid,.formula-grid,.setup-grid,.result-stats,.breakdown{grid-template-columns:1fr}.palette{grid-template-columns:repeat(7,1fr)}.qhead,.qactions{flex-direction:column;align-items:stretch}.actions{width:100%}.actions .btn{flex:1}.break-row{grid-template-columns:110px 1fr 45px}}
+@media print{.topbar,.sidebar,.qactions,.result-actions,footer{display:none!important}body{background:#fff}.shell{max-width:none}.card{box-shadow:none}.review-item{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div class="brand"><div class="logo">EL</div><div><h1>Exponential & Logarithmic Functions Master</h1><small>Reviewer + high-probability quiz</small></div></div>
+  <nav class="nav">
+    <button class="btn outline" data-go="home">⌂ <span>Home</span></button>
+    <button class="btn outline" data-go="reviewer">📘 <span>Reviewer</span></button>
+    <button class="btn primary" data-go="setup">✎ <span>Quiz</span></button>
+  </nav>
+</header>
+
+<main>
+<section id="homeScreen" class="screen">
+  <div class="hero">
+    <article class="card hero-main">
+      <span class="eyebrow">47-PAGE SOURCE-BASED REVIEWER</span>
+      <h2>Understand the functions, then master the equations.</h2>
+      <p class="muted">Review laws of exponents, exponential functions and their graphs, growth and decay, the power series of eˣ, logarithmic functions, logarithmic properties, conversion of forms, and basic equations.</p>
+      <div class="chips">
+        <span class="chip">Laws of Exponents</span><span class="chip">Exponential Graphs</span><span class="chip">Growth & Decay</span>
+        <span class="chip">Power Series of eˣ</span><span class="chip">Common & Natural Logs</span><span class="chip">Log Properties</span>
+      </div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:22px"><button class="btn primary" data-go="reviewer">Open Reviewer</button><button class="btn secondary" data-go="setup">Take the Quiz</button></div>
+    </article>
+    <aside class="card">
+      <h3>Question Bank</h3><p class="muted">All items include the correct answer and a short explanation.</p>
+      <div class="count-grid">
+        <div class="count"><span>Multiple Choice</span><strong>30</strong></div>
+        <div class="count"><span>True or False</span><strong>20</strong></div>
+        <div class="count"><span>Identification</span><strong>20</strong></div>
+        <div class="count"><span>Problem Solving</span><strong>30</strong></div>
+      </div>
+      <div class="count" style="margin-top:10px"><span>Total Quiz Bank</span><strong>100 items</strong></div>
+    </aside>
+  </div>
+</section>
+
+<section id="reviewerScreen" class="screen hidden">
+  <div class="card">
+    <span class="eyebrow">EXAM-FOCUSED REVIEWER</span>
+    <h2 style="font-size:clamp(2rem,5vw,3.6rem)">What is most likely to be tested</h2>
+    <p class="muted">The learning objectives on page 2 emphasize definitions, parts of expressions, exponent laws, logarithm properties, conversion of forms, and solving basic equations.</p>
+    <div class="priority-grid">
+      <div class="priority high"><strong>Very High Probability</strong><span class="muted">Identify and apply exponent and logarithm laws.</span></div>
+      <div class="priority high"><strong>Very High Probability</strong><span class="muted">Convert log_b(x)=y and bʸ=x in either direction.</span></div>
+      <div class="priority high"><strong>Very High Probability</strong><span class="muted">Evaluate the same kinds of logarithms used in Problems 1-5.</span></div>
+      <div class="priority medium"><strong>High Probability</strong><span class="muted">State domain, range, intercept, asymptote, growth, and decay.</span></div>
+      <div class="priority medium"><strong>High Probability</strong><span class="muted">Use A=P(1±r)ᵗ and y=abˣ for growth or decay.</span></div>
+      <div class="priority medium"><strong>Possible Challenge Item</strong><span class="muted">Use or recognize the power series of eˣ.</span></div>
+    </div>
+  </div>
+
+  <details class="lesson" open>
+    <summary>1. Laws of Exponents - PDF pages 5-6</summary>
+    <div class="lesson-body">
+      <div class="formula-grid">
+        <div class="formula"><strong>Product Rule</strong><div class="math">aᵐ·aⁿ=aᵐ⁺ⁿ</div><div class="example">x³·x⁵=x⁸</div></div>
+        <div class="formula"><strong>Quotient Rule</strong><div class="math">aᵐ/aⁿ=aᵐ⁻ⁿ</div><div class="example">y⁹/y⁴=y⁵</div></div>
+        <div class="formula"><strong>Power of a Power</strong><div class="math">(aᵐ)ⁿ=aᵐⁿ</div><div class="example">(x²)⁴=x⁸</div></div>
+        <div class="formula"><strong>Power of a Product</strong><div class="math">(abc)ⁿ=aⁿbⁿcⁿ</div><div class="example">(2xy)³=8x³y³</div></div>
+        <div class="formula"><strong>Power of a Quotient</strong><div class="math">(a/b)ⁿ=aⁿ/bⁿ</div><div class="example">(x/y)²=x²/y²</div></div>
+        <div class="formula"><strong>Fractional Exponent</strong><div class="math">aᵐ⁄ⁿ=ⁿ√(aᵐ)</div><div class="example">16³⁄⁴=8</div></div>
+        <div class="formula"><strong>Negative Exponent</strong><div class="math">a⁻ᵐ=1/aᵐ</div><div class="example">x⁻³=1/x³</div></div>
+        <div class="formula"><strong>Zero Exponent</strong><div class="math">a⁰=1</div><div class="example">7⁰=1</div></div>
+        <div class="formula"><strong>One-to-One Property</strong><div class="math">aᵐ=aⁿ ⇒ m=n</div><div class="example">3ˣ⁺¹=3⁵ ⇒ x=4</div></div>
+      </div>
+      <div class="alert" style="margin-top:12px"><strong>Memory rule:</strong> multiply same bases → add exponents; divide same bases → subtract exponents; power of a power → multiply exponents.</div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>2. Exponential expressions and functions - PDF pages 8-12</summary>
+    <div class="lesson-body">
+      <div class="formula-grid">
+        <div class="formula"><strong>Exponential Expression</strong><div class="math">abˣ⁻ᶜ+d</div><div class="example">The source requires b>0 and b≠1.</div></div>
+        <div class="formula"><strong>Basic Exponential Function</strong><div class="math">f(x)=bˣ</div><div class="example">The variable x appears in the exponent.</div></div>
+        <div class="formula"><strong>Constant e</strong><div class="math">e≈2.71832</div><div class="example">Used for natural growth, decay, and natural logarithms.</div></div>
+        <div class="formula"><strong>Domain</strong><div class="math">(−∞,+∞)</div><div class="example">Any real x-value may be used.</div></div>
+        <div class="formula"><strong>Range</strong><div class="math">(0,+∞)</div><div class="example">The output is always positive.</div></div>
+        <div class="formula"><strong>y-intercept</strong><div class="math">(0,1)</div><div class="example">b⁰=1.</div></div>
+        <div class="formula"><strong>Horizontal Asymptote</strong><div class="math">y=0</div><div class="example">The graph approaches but does not reach the x-axis.</div></div>
+        <div class="formula"><strong>No x-intercept</strong><div class="math">bˣ>0</div><div class="example">A basic exponential function never equals zero.</div></div>
+      </div>
+      <div class="graph-grid" style="margin-top:12px">
+        <div class="graph-card"><strong>Growth: b>1</strong><svg viewBox="0 0 240 180" aria-label="Increasing exponential graph"><line x1="25" y1="150" x2="225" y2="150" stroke="#8a9699"/><line x1="60" y1="15" x2="60" y2="165" stroke="#8a9699"/><path d="M25 145 C90 143 130 130 165 93 C190 66 207 30 220 12" fill="none" stroke="#c98c32" stroke-width="4"/></svg><p class="muted">Rises from left to right.</p></div>
+        <div class="graph-card"><strong>Decay: 0&lt;b&lt;1</strong><svg viewBox="0 0 240 180" aria-label="Decreasing exponential graph"><line x1="25" y1="150" x2="225" y2="150" stroke="#8a9699"/><line x1="60" y1="15" x2="60" y2="165" stroke="#8a9699"/><path d="M25 15 C45 55 70 95 110 125 C145 143 185 148 220 149" fill="none" stroke="#5f98c8" stroke-width="4"/></svg><p class="muted">Falls from left to right.</p></div>
+        <div class="graph-card"><strong>Inverse idea</strong><svg viewBox="0 0 240 180" aria-label="Exponential and logarithmic inverse graphs"><line x1="25" y1="150" x2="225" y2="150" stroke="#8a9699"/><line x1="60" y1="15" x2="60" y2="165" stroke="#8a9699"/><line x1="25" y1="165" x2="220" y2="15" stroke="#aaa" stroke-dasharray="5 5"/><path d="M25 145 C100 143 145 112 180 60 C195 38 208 22 220 12" fill="none" stroke="#c98c32" stroke-width="3"/><path d="M62 165 C66 110 88 78 135 54 C170 37 195 27 220 22" fill="none" stroke="#5f98c8" stroke-width="3"/></svg><p class="muted">Page 34 shows exponential and logarithmic graphs reflected across y=x.</p></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>3. Power series, exponential graphs, growth and decay - PDF pages 13-24</summary>
+    <div class="lesson-body">
+      <div class="formula-grid">
+        <div class="formula"><strong>Power Series of eˣ</strong><div class="math">eˣ=Σ(xⁿ/n!)=1+x/1!+x²/2!+x³/3!+...</div><div class="example">More terms give a more accurate result.</div></div>
+        <div class="formula"><strong>Worked Power-Series Result</strong><div class="math">3e⁻¹≈1.1036</div><div class="example">This is the final answer on page 15.</div></div>
+        <div class="formula"><strong>General Growth/Decay Model</strong><div class="math">y=abˣ</div><div class="example">a=initial value; b=factor; x=time periods.</div></div>
+        <div class="formula"><strong>Percentage Growth</strong><div class="math">A=P(1+r)ᵗ</div><div class="example">Use a decimal growth rate r.</div></div>
+        <div class="formula"><strong>Percentage Decay</strong><div class="math">A=P(1−r)ᵗ</div><div class="example">Use a decimal decay rate r.</div></div>
+        <div class="formula"><strong>Natural Growth and Decay Forms</strong><div class="math">y=Ae⁻ᵏˣ and y=A(1−e⁻ᵏˣ)</div><div class="example">The PDF lists engineering and science applications on pages 23-24.</div></div>
+      </div>
+      <div class="alert" style="margin-top:12px"><strong>Application strategy:</strong> identify the initial value, convert the percentage to a decimal, choose 1+r for growth or 1−r for decay, and then apply the number of periods.</div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>4. Logarithmic functions - PDF pages 26-34</summary>
+    <div class="lesson-body">
+      <div class="formula-grid">
+        <div class="formula"><strong>Meaning of a Logarithm</strong><div class="math">log_b(x)=y</div><div class="example">It asks: to what exponent must b be raised to obtain x?</div></div>
+        <div class="formula"><strong>Equivalent Exponential Form</strong><div class="math">log_b(x)=y ⇔ bʸ=x</div><div class="example">The base remains the same.</div></div>
+        <div class="formula"><strong>Parts</strong><div class="math">b=base, x=argument, y=exponent/logarithm</div><div class="example">Restrictions: b>0, b≠1, x>0.</div></div>
+        <div class="formula"><strong>Common Logarithm</strong><div class="math">log₁₀(x)=log(x)</div><div class="example">Use the calculator's LOG key.</div></div>
+        <div class="formula"><strong>Natural Logarithm</strong><div class="math">logₑ(x)=ln(x)</div><div class="example">Use the calculator's LN key.</div></div>
+        <div class="formula"><strong>Graph Relationship</strong><div class="math">Exponential and logarithmic functions are inverses.</div><div class="example">Page 34 displays their reflection across y=x.</div></div>
+      </div>
+      <div class="alert" style="margin-top:12px"><strong>Conversion trick:</strong> in log_b(c)=a, keep b as the base and rewrite it as bᵃ=c.</div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>5. Logarithmic properties and evaluated examples - PDF pages 35-46</summary>
+    <div class="lesson-body">
+      <div class="formula-grid">
+        <div class="formula"><strong>Product Rule</strong><div class="math">log_a(xy)=log_a(x)+log_a(y)</div><div class="example">Multiplication inside → addition outside.</div></div>
+        <div class="formula"><strong>Quotient Rule</strong><div class="math">log_a(x/y)=log_a(x)−log_a(y)</div><div class="example">Division inside → subtraction outside.</div></div>
+        <div class="formula"><strong>Power Rule</strong><div class="math">log_a(xᵖ)=p log_a(x)</div><div class="example">The exponent moves in front.</div></div>
+        <div class="formula"><strong>Change of Base</strong><div class="math">log_a(x)=log_b(x)/log_b(a)</div><div class="example">Useful for calculator evaluation.</div></div>
+        <div class="formula"><strong>Equality Rule</strong><div class="math">log_a(x)=log_a(y) ⇒ x=y</div><div class="example">The arguments are equal.</div></div>
+        <div class="formula"><strong>Problem 1</strong><div class="math">log₃(9)=2</div><div class="example">Because 3²=9.</div></div>
+        <div class="formula"><strong>Problem 2</strong><div class="math">log₁₀(10)=1</div><div class="example">Because 10¹=10.</div></div>
+        <div class="formula"><strong>Problem 3</strong><div class="math">log₁₆(8)=3/4</div><div class="example">(2⁴)ˣ=2³ ⇒ 4x=3.</div></div>
+        <div class="formula"><strong>Problem 4</strong><div class="math">lg(0.001)=−3</div><div class="example">Because 0.001=10⁻³.</div></div>
+        <div class="formula"><strong>Problem 5</strong><div class="math">ln(e)=1</div><div class="example">Because e¹=e.</div></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary>6. Source consistency notes</summary>
+    <div class="lesson-body">
+      <div class="source-note"><strong>Page 17-18:</strong> the question line says x=1.2, but the solution and graph report x=−1.2 and y=3.67. The quiz follows the solution value x=−1.2.</div>
+      <div class="source-note" style="margin-top:10px"><strong>Page 22:</strong> the heading says a quantity “increases,” but the displayed formula A=P(1−r)ᵗ is the decay formula. The reviewer labels it as decay.</div>
+      <div class="source-note" style="margin-top:10px"><strong>Page 44:</strong> one intermediate line appears as 10ˣ=10¹, while 0.001=10⁻³ and the final answer is −3. The quiz uses the intended exponent −3.</div>
+    </div>
+  </details>
+
+  <div class="card" style="margin-top:14px">
+    <h3>Self-Study Checklist</h3>
+    <div class="checklist">
+      <label class="checkitem"><input type="checkbox" data-check="1"><span>I can identify and apply all exponent laws.</span></label>
+      <label class="checkitem"><input type="checkbox" data-check="2"><span>I know the definition and restrictions of an exponential function.</span></label>
+      <label class="checkitem"><input type="checkbox" data-check="3"><span>I know domain, range, intercept, asymptote, growth, and decay.</span></label>
+      <label class="checkitem"><input type="checkbox" data-check="4"><span>I can use y=abˣ and A=P(1±r)ᵗ.</span></label>
+      <label class="checkitem"><input type="checkbox" data-check="5"><span>I recognize the power series of eˣ and the worked result 3e⁻¹≈1.1036.</span></label>
+      <label class="checkitem"><input type="checkbox" data-check="6"><span>I can identify the base, argument, and logarithm.</span></label>
+      <label class="checkitem"><input type="checkbox" data-check="7"><span>I can convert between logarithmic and exponential forms.</span></label>
+      <label class="checkitem"><input type="checkbox" data-check="8"><span>I can apply product, quotient, power, change-of-base, and equality rules.</span></label>
+      <label class="checkitem"><input type="checkbox" data-check="9"><span>I can solve the five types of evaluated logarithm examples in the PDF.</span></label>
+    </div>
+  </div>
+</section>
+
+<section id="setupScreen" class="screen hidden">
+  <div class="card">
+    <span class="eyebrow">QUIZ GENERATOR</span>
+    <h2 style="font-size:clamp(2rem,5vw,3.6rem)">Build your practice exam</h2>
+    <p class="muted">Choose a type, topic, number of items, and study mode.</p>
+    <div class="setup-grid">
+      <div class="field"><label for="quizType">Question type</label><select id="quizType">
+        <option value="all">Mixed - all types</option><option value="mcq">Multiple Choice (30)</option>
+        <option value="tf">True or False (20)</option><option value="identification">Identification (20)</option>
+        <option value="problem">Problem Solving (30)</option></select></div>
+      <div class="field"><label for="quizTopic">Topic group</label><select id="quizTopic">
+        <option value="all">All topics</option><option value="exponents">Laws of Exponents</option>
+        <option value="exponential">Exponential Functions</option><option value="logarithms">Logarithms</option></select></div>
+      <div class="field"><label for="quizCount">Number of items</label><select id="quizCount">
+        <option value="10">10 items</option><option value="20" selected>20 items</option><option value="30">30 items</option>
+        <option value="50">50 items</option><option value="all">All available</option></select></div>
+      <div class="field"><label for="quizMode">Mode</label><select id="quizMode"><option value="exam">Exam - answers after submission</option><option value="practice">Practice - check each answer</option></select></div>
+      <div class="field"><label for="quizTime">Time limit</label><select id="quizTime"><option value="0">No timer</option><option value="15">15 minutes</option><option value="30" selected>30 minutes</option><option value="45">45 minutes</option><option value="60">60 minutes</option></select></div>
+      <div class="field"><label>Available after filters</label><div class="count"><span>Matching items</span><strong id="availableCount">100</strong></div></div>
+    </div>
+    <div class="toggle-row"><div><strong>Shuffle questions</strong><div class="muted" style="font-size:.8rem">Different order each attempt.</div></div><label class="switch"><input id="shuffleQuestions" type="checkbox" checked><span class="slider"></span></label></div>
+    <div class="toggle-row"><div><strong>Shuffle choices</strong><div class="muted" style="font-size:.8rem">Applies to choice-based questions.</div></div><label class="switch"><input id="shuffleChoices" type="checkbox" checked><span class="slider"></span></label></div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn primary" id="startQuiz">Start Quiz</button><button class="btn secondary hidden" id="resumeQuiz">Resume Saved Quiz</button><button class="btn danger hidden" id="deleteQuiz">Delete Saved Quiz</button></div>
+  </div>
+</section>
+
+<section id="quizScreen" class="screen hidden">
+  <div class="quiz-layout">
+    <aside class="card sidebar">
+      <div class="stats"><div class="stat"><span>Question</span><strong id="questionCount">1/20</strong></div><div class="stat"><span>Answered</span><strong id="answeredCount">0</strong></div><div class="stat"><span>Time</span><strong id="timer" class="timer">30:00</strong></div><div class="stat"><span>Flagged</span><strong id="flaggedCount">0</strong></div></div>
+      <div id="palette" class="palette"></div><button class="btn primary" id="submitQuiz" style="width:100%;margin-top:15px">Submit Quiz</button>
+    </aside>
+    <article class="card qcard">
+      <div class="qhead"><div class="tags"><span class="tag" id="typeTag"></span><span class="tag" id="categoryTag"></span><span class="tag hot">★ High Probability</span><span class="tag" id="pageTag"></span></div><button class="btn warning" id="flagBtn">⚐ Flag</button></div>
+      <div id="questionText" class="question"></div><div id="answerArea"></div><div id="feedbackArea"></div>
+      <div class="qactions"><div class="actions"><button class="btn outline" id="previousBtn">← Previous</button><button class="btn secondary hidden" id="checkAnswer">Check Answer</button></div><div class="actions"><button class="btn outline" id="clearAnswer">Clear</button><button class="btn primary" id="nextBtn">Next →</button></div></div>
+    </article>
+  </div>
+</section>
+
+<section id="resultsScreen" class="screen hidden">
+  <div class="card score-wrap">
+    <span class="eyebrow">QUIZ COMPLETED</span><h2 style="font-size:2.6rem">Your Score</h2>
+    <div id="scoreRing" class="score-ring"><strong id="scorePercent">0%</strong></div><h3 id="scoreText">0 out of 0 correct</h3><p id="scoreMessage" class="muted"></p>
+    <div class="result-stats"><div class="stat"><span>Correct</span><strong id="correctResult">0</strong></div><div class="stat"><span>Incorrect</span><strong id="wrongResult">0</strong></div><div class="stat"><span>Unanswered</span><strong id="blankResult">0</strong></div><div class="stat"><span>Time Used</span><strong id="timeResult">0m</strong></div></div>
+    <div class="result-actions" style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap"><button class="btn primary" data-go="setup">Create Another Quiz</button><button class="btn secondary" id="showWrong">Show Incorrect Only</button><button class="btn outline" onclick="window.print()">Print Review</button></div>
+  </div>
+  <div class="breakdown"><div class="card"><h3>By Question Type</h3><div id="typeBreakdown"></div></div><div class="card"><h3>By Topic Group</h3><div id="topicBreakdown"></div></div></div>
+  <div class="card" style="margin-top:16px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><div><h3 style="margin:0">Answer Review</h3><p class="muted" style="margin:4px 0 0">Correct answers and explanations</p></div><select id="reviewFilter" style="width:auto"><option value="all">All questions</option><option value="wrong">Incorrect and unanswered</option><option value="correct">Correct only</option></select></div><div id="reviewList" class="review-list"></div></div>
+</section>
+</main>
+<footer>Developed by RekzBanz • Based on “Exponential and Logarithmic Function”</footer>
+</div>
+
+<script>
+(() => {
+"use strict";
+const BANK=[{"id": 1, "type": "mcq", "category": "Laws of Exponents", "page": "5", "question": "Which rule is represented by aᵐ · aⁿ = aᵐ⁺ⁿ?", "options": ["Product Rule", "Quotient Rule", "Power of a Power Rule", "Zero Exponent Rule"], "answer": "Product Rule", "solution": "When powers have the same base and are multiplied, add their exponents."}, {"id": 2, "type": "mcq", "category": "Laws of Exponents", "page": "5", "question": "Which rule is represented by aᵐ/aⁿ = aᵐ⁻ⁿ?", "options": ["Product Rule", "Quotient Rule", "Power of a Product Rule", "Fractional Exponent Rule"], "answer": "Quotient Rule", "solution": "When powers have the same nonzero base and are divided, subtract their exponents."}, {"id": 3, "type": "mcq", "category": "Laws of Exponents", "page": "5", "question": "Which rule is represented by (aᵐ)ⁿ = aᵐⁿ?", "options": ["Power of a Power Rule", "Product Rule", "Power of a Quotient Rule", "One-to-One Property"], "answer": "Power of a Power Rule", "solution": "A power raised to another power is simplified by multiplying the exponents."}, {"id": 4, "type": "mcq", "category": "Laws of Exponents", "page": "5", "question": "Which expression is equivalent to (abc)ⁿ?", "options": ["aⁿbⁿcⁿ", "abcⁿ", "aⁿ+bⁿ+cⁿ", "aⁿ⁺ᵇⁿ⁺ᶜⁿ"], "answer": "aⁿbⁿcⁿ", "solution": "The Power of a Product Rule applies the exponent to every factor."}, {"id": 5, "type": "mcq", "category": "Laws of Exponents", "page": "5", "question": "Which expression is equivalent to (a/b)ⁿ?", "options": ["aⁿ/bⁿ", "aⁿ/b", "a/bⁿ", "aⁿ−bⁿ"], "answer": "aⁿ/bⁿ", "solution": "The Power of a Quotient Rule applies the exponent to both numerator and denominator."}, {"id": 6, "type": "mcq", "category": "Laws of Exponents", "page": "6", "question": "Which radical expression is equivalent to aᵐ⁄ⁿ?", "options": ["ⁿ√(aᵐ)", "ᵐ√(aⁿ)", "aᵐ⁻ⁿ", "1/aᵐⁿ"], "answer": "ⁿ√(aᵐ)", "solution": "The denominator n becomes the root index, and m remains the power."}, {"id": 7, "type": "mcq", "category": "Laws of Exponents", "page": "6", "question": "Which expression is equivalent to a⁻ᵐ?", "options": ["1/aᵐ", "−aᵐ", "aᵐ", "1/(−aᵐ)"], "answer": "1/aᵐ", "solution": "A negative exponent indicates the reciprocal with a positive exponent."}, {"id": 8, "type": "mcq", "category": "Laws of Exponents", "page": "6", "question": "For a nonzero base a, what is a⁰?", "options": ["1", "0", "a", "Undefined"], "answer": "1", "solution": "The Zero Exponent Rule states that a⁰=1."}, {"id": 9, "type": "mcq", "category": "Exponential Expressions", "page": "9", "question": "Which form is identified in the PDF as a transformed exponential expression?", "options": ["abˣ⁻ᶜ+d", "ax²+bx+c", "mx+b", "log_b(x)"], "answer": "abˣ⁻ᶜ+d", "solution": "Page 9 presents an exponential expression in the form ab^(x-c)+d."}, {"id": 10, "type": "mcq", "category": "Exponential Expressions", "page": "9", "question": "Which restriction is required for the exponential base b?", "options": ["b>0 and b≠1", "b<0", "b=1", "b may be any real number"], "answer": "b>0 and b≠1", "solution": "The source requires a positive base that is not equal to 1."}, {"id": 11, "type": "mcq", "category": "Exponential Functions", "page": "10", "question": "Which is the basic form of an exponential function?", "options": ["f(x)=bˣ", "f(x)=bx", "f(x)=xᵇ", "f(x)=log_b(x)"], "answer": "f(x)=bˣ", "solution": "An exponential function places the variable in the exponent."}, {"id": 12, "type": "mcq", "category": "Exponential Functions", "page": "8", "question": "According to the presentation, e is approximately:", "options": ["2.71832", "3.14159", "1.61803", "10"], "answer": "2.71832", "solution": "Page 8 uses the rounded value e≈2.71832."}, {"id": 13, "type": "mcq", "category": "Exponential Properties", "page": "11", "question": "What is the domain of a basic exponential function?", "options": ["All real numbers", "Positive real numbers only", "Nonnegative real numbers only", "All integers"], "answer": "All real numbers", "solution": "The source gives the domain as (−∞,+∞)."}, {"id": 14, "type": "mcq", "category": "Exponential Properties", "page": "11", "question": "What is the range of a basic exponential function?", "options": ["(0,+∞)", "[0,+∞)", "(−∞,+∞)", "(−∞,0)"], "answer": "(0,+∞)", "solution": "A basic exponential function has only positive output values."}, {"id": 15, "type": "mcq", "category": "Exponential Properties", "page": "11", "question": "Through which point does every basic exponential function pass?", "options": ["(0,1)", "(1,0)", "(0,0)", "(1,1)"], "answer": "(0,1)", "solution": "For f(x)=bˣ, f(0)=b⁰=1."}, {"id": 16, "type": "mcq", "category": "Exponential Properties", "page": "11", "question": "What is the horizontal asymptote of a basic exponential function?", "options": ["y=0", "x=0", "y=1", "x=1"], "answer": "y=0", "solution": "The graph approaches the x-axis but does not reach it."}, {"id": 17, "type": "mcq", "category": "Exponential Properties", "page": "11", "question": "A basic exponential function has:", "options": ["No x-intercept", "One x-intercept", "Two x-intercepts", "An x-intercept at (0,1)"], "answer": "No x-intercept", "solution": "Since bˣ>0, a basic exponential function never equals zero."}, {"id": 18, "type": "mcq", "category": "Growth and Decay", "page": "11-12", "question": "If b>1 in f(x)=bˣ, the graph shows:", "options": ["Exponential growth", "Exponential decay", "A constant function", "A linear function"], "answer": "Exponential growth", "solution": "The graph rises from left to right when b>1."}, {"id": 19, "type": "mcq", "category": "Growth and Decay", "page": "11-12", "question": "If 0<b<1 in f(x)=bˣ, the graph shows:", "options": ["Exponential decay", "Exponential growth", "A constant function", "A quadratic function"], "answer": "Exponential decay", "solution": "The graph falls from left to right when the base is between 0 and 1."}, {"id": 20, "type": "mcq", "category": "Growth and Decay", "page": "19-22", "question": "Which model represents percentage decay?", "options": ["A=P(1−r)ᵗ", "A=P(1+r)ᵗ", "A=P+rᵗ", "A=Prt"], "answer": "A=P(1−r)ᵗ", "solution": "For decay, subtract the decimal rate from 1 before raising the factor to t."}, {"id": 21, "type": "mcq", "category": "Logarithm Basics", "page": "26", "question": "A logarithm tells us:", "options": ["The exponent to which a base must be raised", "The base plus the argument", "The product of two exponents", "The slope of an exponential graph"], "answer": "The exponent to which a base must be raised", "solution": "A logarithm answers: to what exponent must the base be raised to obtain the number?"}, {"id": 22, "type": "mcq", "category": "Logarithmic Form", "page": "28", "question": "In log_b(x)=y, what is b?", "options": ["Base", "Argument", "Exponent only", "Output of an exponential function"], "answer": "Base", "solution": "The presentation labels b as the base."}, {"id": 23, "type": "mcq", "category": "Logarithmic Form", "page": "28", "question": "In log_b(x)=y, what is x?", "options": ["Argument", "Base", "Logarithm base restriction", "Exponent of b in the written log form"], "answer": "Argument", "solution": "The presentation labels x as the argument, with x>0."}, {"id": 24, "type": "mcq", "category": "Logarithmic Form", "page": "28-29", "question": "Which restrictions are required for log_b(x)?", "options": ["b>0, b≠1, and x>0", "b<0 and x<0", "b=1 and x≥0", "Only x≠0"], "answer": "b>0, b≠1, and x>0", "solution": "The base must be positive and not 1, while the argument must be positive."}, {"id": 25, "type": "mcq", "category": "Common and Natural Logs", "page": "30", "question": "A common logarithm has base:", "options": ["10", "e", "2", "1"], "answer": "10", "solution": "log(x) means log base 10."}, {"id": 26, "type": "mcq", "category": "Common and Natural Logs", "page": "32", "question": "A natural logarithm has base:", "options": ["e", "10", "2", "0"], "answer": "e", "solution": "ln(x) means log base e."}, {"id": 27, "type": "mcq", "category": "Logarithmic Conversion", "page": "29,36", "question": "Which exponential form is equivalent to log_b(x)=y?", "options": ["bʸ=x", "xʸ=b", "yᵇ=x", "bˣ=y"], "answer": "bʸ=x", "solution": "The base stays the same, while the exponent and result exchange positions."}, {"id": 28, "type": "mcq", "category": "Logarithmic Properties", "page": "35", "question": "Which is the logarithmic product rule?", "options": ["log_a(xy)=log_a(x)+log_a(y)", "log_a(xy)=log_a(x)−log_a(y)", "log_a(xy)=ylog_a(x)", "log_a(xy)=log_a(x+y)"], "answer": "log_a(xy)=log_a(x)+log_a(y)", "solution": "A product inside one logarithm becomes a sum of logarithms."}, {"id": 29, "type": "mcq", "category": "Logarithmic Properties", "page": "35", "question": "Which is the logarithmic quotient rule?", "options": ["log_a(x/y)=log_a(x)−log_a(y)", "log_a(x/y)=log_a(x)+log_a(y)", "log_a(x/y)=ylog_a(x)", "log_a(x/y)=log_a(x−y)"], "answer": "log_a(x/y)=log_a(x)−log_a(y)", "solution": "A quotient inside one logarithm becomes a difference of logarithms."}, {"id": 30, "type": "mcq", "category": "Logarithmic Properties", "page": "35", "question": "Which is a correct change-of-base formula for log_a(x)?", "options": ["log_b(x)/log_b(a)", "log_b(a)/log_b(x)", "log_b(x)−log_b(a)", "log_b(x)+log_b(a)"], "answer": "log_b(x)/log_b(a)", "solution": "The change-of-base rule divides the log of the argument by the log of the original base."}, {"id": 31, "type": "tf", "category": "Laws of Exponents", "page": "5", "question": "When multiplying powers with the same base, add the exponents.", "answer": "True", "solution": "aᵐ·aⁿ=aᵐ⁺ⁿ."}, {"id": 32, "type": "tf", "category": "Laws of Exponents", "page": "5", "question": "When dividing powers with the same base, add the exponents.", "answer": "False", "solution": "The Quotient Rule subtracts the exponents."}, {"id": 33, "type": "tf", "category": "Laws of Exponents", "page": "6", "question": "A negative exponent represents a reciprocal.", "answer": "True", "solution": "a⁻ᵐ=1/aᵐ."}, {"id": 34, "type": "tf", "category": "Laws of Exponents", "page": "6", "question": "For a nonzero base, a⁰=0.", "answer": "False", "solution": "For a nonzero base, a⁰=1."}, {"id": 35, "type": "tf", "category": "Exponential Properties", "page": "11", "question": "The domain of a basic exponential function is all real numbers.", "answer": "True", "solution": "The domain is (−∞,+∞)."}, {"id": 36, "type": "tf", "category": "Exponential Properties", "page": "11", "question": "Zero is included in the range of a basic exponential function.", "answer": "False", "solution": "The range is (0,+∞), so zero is not included."}, {"id": 37, "type": "tf", "category": "Exponential Properties", "page": "11", "question": "Every basic exponential function passes through (0,1).", "answer": "True", "solution": "b⁰=1."}, {"id": 38, "type": "tf", "category": "Exponential Properties", "page": "11", "question": "A basic exponential function has an x-intercept.", "answer": "False", "solution": "Since bˣ is always positive, it never equals zero."}, {"id": 39, "type": "tf", "category": "Growth and Decay", "page": "11-12", "question": "A base greater than 1 produces exponential decay.", "answer": "False", "solution": "A base greater than 1 produces exponential growth."}, {"id": 40, "type": "tf", "category": "Growth and Decay", "page": "11-12", "question": "A base between 0 and 1 produces a graph that falls from left to right.", "answer": "True", "solution": "This is exponential decay."}, {"id": 41, "type": "tf", "category": "Exponential Functions", "page": "8", "question": "The constant e is the base of natural logarithms.", "answer": "True", "solution": "The source describes e as the base of natural logarithms."}, {"id": 42, "type": "tf", "category": "Logarithm Basics", "page": "26", "question": "A logarithm is the inverse of an exponential function.", "answer": "True", "solution": "This is the definition stated in the PDF."}, {"id": 43, "type": "tf", "category": "Logarithmic Form", "page": "28", "question": "The argument of a logarithm may be zero.", "answer": "False", "solution": "The source requires x>0."}, {"id": 44, "type": "tf", "category": "Common and Natural Logs", "page": "30", "question": "A common logarithm uses base 10.", "answer": "True", "solution": "log(x)=log₁₀(x)."}, {"id": 45, "type": "tf", "category": "Common and Natural Logs", "page": "32", "question": "A natural logarithm uses base e.", "answer": "True", "solution": "ln(x)=logₑ(x)."}, {"id": 46, "type": "tf", "category": "Logarithmic Conversion", "page": "29", "question": "log_b(x)=y is equivalent to bʸ=x.", "answer": "True", "solution": "This is the logarithmic-exponential equivalence."}, {"id": 47, "type": "tf", "category": "Logarithmic Properties", "page": "35", "question": "The logarithm of a product expands as a difference of logarithms.", "answer": "False", "solution": "It expands as a sum."}, {"id": 48, "type": "tf", "category": "Logarithmic Properties", "page": "35", "question": "The logarithm of a quotient expands as a difference of logarithms.", "answer": "True", "solution": "log_a(x/y)=log_a(x)−log_a(y)."}, {"id": 49, "type": "tf", "category": "Logarithmic Properties", "page": "35", "question": "In the power rule, the exponent moves in front as a multiplier.", "answer": "True", "solution": "log_a(xᵖ)=p log_a(x)."}, {"id": 50, "type": "tf", "category": "Logarithmic Properties", "page": "35", "question": "If log_a(x)=log_a(y), then x=y.", "answer": "True", "solution": "This is the Equality Rule shown on page 35."}, {"id": 51, "type": "identification", "category": "Laws of Exponents", "page": "5", "question": "Name the rule: aᵐ·aⁿ=aᵐ⁺ⁿ.", "accepted": ["product rule", "product law", "product rule of exponents"], "answerDisplay": "Product Rule", "solution": "This rule adds exponents when like bases are multiplied."}, {"id": 52, "type": "identification", "category": "Laws of Exponents", "page": "5", "question": "Name the rule: aᵐ/aⁿ=aᵐ⁻ⁿ.", "accepted": ["quotient rule", "quotient law", "quotient rule of exponents"], "answerDisplay": "Quotient Rule", "solution": "This rule subtracts exponents when like bases are divided."}, {"id": 53, "type": "identification", "category": "Laws of Exponents", "page": "5", "question": "Name the rule: (aᵐ)ⁿ=aᵐⁿ.", "accepted": ["power of a power rule", "power of power rule"], "answerDisplay": "Power of a Power Rule", "solution": "The two exponents are multiplied."}, {"id": 54, "type": "identification", "category": "Laws of Exponents", "page": "6", "question": "Name the property: if aᵐ=aⁿ, then m=n.", "accepted": ["one-to-one property", "one to one property"], "answerDisplay": "One-to-One Property", "solution": "Equal exponential expressions with the same valid base have equal exponents."}, {"id": 55, "type": "identification", "category": "Exponential Functions", "page": "10", "question": "In an exponential function, what variable is normally the independent variable?", "accepted": ["x", "variable x"], "answerDisplay": "x", "solution": "The source identifies x as the independent variable."}, {"id": 56, "type": "identification", "category": "Exponential Functions", "page": "10", "question": "In an exponential function, what variable or notation is normally the dependent variable?", "accepted": ["y", "f(x)", "g(x)", "y or f(x) or g(x)"], "answerDisplay": "y, f(x), or g(x)", "solution": "The source lists y, f(x), or g(x) as dependent-variable notation."}, {"id": 57, "type": "identification", "category": "Exponential Properties", "page": "11", "question": "Name the line y=0 that an exponential graph approaches.", "accepted": ["horizontal asymptote", "asymptote", "the horizontal asymptote"], "answerDisplay": "Horizontal asymptote", "solution": "The basic exponential function has horizontal asymptote y=0."}, {"id": 58, "type": "identification", "category": "Growth and Decay", "page": "11-12", "question": "What behavior occurs when b>1?", "accepted": ["exponential growth", "growth"], "answerDisplay": "Exponential growth", "solution": "The graph rises from left to right."}, {"id": 59, "type": "identification", "category": "Growth and Decay", "page": "11-12", "question": "What behavior occurs when 0<b<1?", "accepted": ["exponential decay", "decay"], "answerDisplay": "Exponential decay", "solution": "The graph falls from left to right."}, {"id": 60, "type": "identification", "category": "Exponential Functions", "page": "8", "question": "Name the constant approximately equal to 2.71832 in the presentation.", "accepted": ["e", "euler's number", "eulers number", "the constant e"], "answerDisplay": "e (Euler's number)", "solution": "The source uses e in natural growth, decay, and natural logarithms."}, {"id": 61, "type": "identification", "category": "Power Series", "page": "13", "question": "In the series eˣ=Σ(xⁿ/n!), what symbol n! is called?", "accepted": ["factorial", "n factorial"], "answerDisplay": "Factorial", "solution": "The denominator n! uses factorial notation."}, {"id": 62, "type": "identification", "category": "Logarithmic Form", "page": "28", "question": "In log_b(x)=y, identify b.", "accepted": ["base", "the base"], "answerDisplay": "Base", "solution": "b is the logarithm's base."}, {"id": 63, "type": "identification", "category": "Logarithmic Form", "page": "28", "question": "In log_b(x)=y, identify x.", "accepted": ["argument", "the argument"], "answerDisplay": "Argument", "solution": "x is the positive argument."}, {"id": 64, "type": "identification", "category": "Logarithmic Form", "page": "28", "question": "In log_b(x)=y, identify y.", "accepted": ["exponent", "logarithm", "the exponent", "the logarithm", "exponent or logarithm"], "answerDisplay": "Exponent or logarithm", "solution": "The presentation identifies y as the exponent or logarithm."}, {"id": 65, "type": "identification", "category": "Common and Natural Logs", "page": "30", "question": "What type of logarithm has base 10?", "accepted": ["common logarithm", "common log"], "answerDisplay": "Common logarithm", "solution": "A common logarithm is written log(x)."}, {"id": 66, "type": "identification", "category": "Common and Natural Logs", "page": "32", "question": "What type of logarithm has base e?", "accepted": ["natural logarithm", "natural log", "naperian logarithm"], "answerDisplay": "Natural logarithm", "solution": "A natural logarithm is written ln(x)."}, {"id": 67, "type": "identification", "category": "Logarithmic Properties", "page": "35", "question": "Name the property: log_a(xy)=log_a(x)+log_a(y).", "accepted": ["product rule", "product property", "logarithmic product rule"], "answerDisplay": "Product Rule", "solution": "A product becomes a sum of logarithms."}, {"id": 68, "type": "identification", "category": "Logarithmic Properties", "page": "35", "question": "Name the property: log_a(x/y)=log_a(x)−log_a(y).", "accepted": ["quotient rule", "quotient property", "logarithmic quotient rule"], "answerDisplay": "Quotient Rule", "solution": "A quotient becomes a difference of logarithms."}, {"id": 69, "type": "identification", "category": "Logarithmic Properties", "page": "35", "question": "Name the rule used to rewrite log_a(x) as log_b(x)/log_b(a).", "accepted": ["change of base rule", "change-of-base rule", "change of base formula", "change-of-base formula"], "answerDisplay": "Change of Base Rule", "solution": "This rule allows another logarithm base to be used."}, {"id": 70, "type": "identification", "category": "Logarithmic Properties", "page": "35", "question": "Name the rule: if log_a(x)=log_a(y), then x=y.", "accepted": ["equality rule", "equality property", "one-to-one property"], "answerDisplay": "Equality Rule", "solution": "Equal logarithms with the same base have equal arguments."}, {"id": 71, "type": "problem", "category": "Laws of Exponents", "page": "5", "question": "Simplify x³·x⁵.", "options": ["x⁸", "x¹⁵", "2x⁸", "x²"], "answer": "x⁸", "solution": "Product Rule: x³·x⁵=x³⁺⁵=x⁸."}, {"id": 72, "type": "problem", "category": "Laws of Exponents", "page": "5", "question": "Simplify y⁹/y⁴.", "options": ["y⁵", "y¹³", "y³⁶", "1/y⁵"], "answer": "y⁵", "solution": "Quotient Rule: y⁹/y⁴=y⁹⁻⁴=y⁵."}, {"id": 73, "type": "problem", "category": "Laws of Exponents", "page": "5", "question": "Simplify (a²)⁴.", "options": ["a⁸", "a⁶", "a¹⁶", "4a²"], "answer": "a⁸", "solution": "Power of a Power: (a²)⁴=a²·⁴=a⁸."}, {"id": 74, "type": "problem", "category": "Laws of Exponents", "page": "5", "question": "Simplify (2xy)³.", "options": ["8x³y³", "6x³y³", "2x³y³", "8xy"], "answer": "8x³y³", "solution": "Power of a Product: 2³x³y³=8x³y³."}, {"id": 75, "type": "problem", "category": "Laws of Exponents", "page": "6", "question": "Evaluate 16³⁄⁴.", "options": ["8", "4", "12", "64"], "answer": "8", "solution": "16³⁄⁴=(⁴√16)³=2³=8."}, {"id": 76, "type": "problem", "category": "Laws of Exponents", "page": "6", "question": "Solve 3ˣ⁺¹=3⁵.", "options": ["x=4", "x=6", "x=5", "x=3"], "answer": "x=4", "solution": "By the One-to-One Property, x+1=5, so x=4."}, {"id": 77, "type": "problem", "category": "Exponential Functions", "page": "10", "question": "Evaluate f(x)=2ˣ when x=3.", "options": ["8", "6", "9", "5"], "answer": "8", "solution": "f(3)=2³=8."}, {"id": 78, "type": "problem", "category": "Exponential Functions", "page": "10-12", "question": "Evaluate g(x)=(1/2)ˣ when x=−2.", "options": ["4", "1/4", "−4", "2"], "answer": "4", "solution": "(1/2)⁻²=2²=4."}, {"id": 79, "type": "problem", "category": "Growth and Decay", "page": "19", "question": "Evaluate y=3(2)ˣ when x=4.", "options": ["48", "24", "16", "81"], "answer": "48", "solution": "y=3·2⁴=3·16=48."}, {"id": 80, "type": "problem", "category": "Growth and Decay", "page": "21", "question": "Evaluate y=640(0.5)ˣ when x=3.", "options": ["80", "320", "40", "160"], "answer": "80", "solution": "y=640(0.5)³=640(0.125)=80."}, {"id": 81, "type": "problem", "category": "Growth and Decay", "page": "20", "question": "A population starts at 500 and grows by 10% per period. Find the population after 2 periods using A=P(1+r)ᵗ.", "options": ["605", "600", "550", "620"], "answer": "605", "solution": "A=500(1.10)²=500(1.21)=605."}, {"id": 82, "type": "problem", "category": "Growth and Decay", "page": "22", "question": "A sample starts at 800 units and decays by 25% per period. Find the amount after 2 periods.", "options": ["450", "600", "350", "500"], "answer": "450", "solution": "A=800(1−0.25)²=800(0.75)²=800(0.5625)=450."}, {"id": 83, "type": "problem", "category": "Growth and Decay", "page": "19-22", "question": "Classify A=1200(1.06)ᵗ.", "options": ["Exponential growth", "Exponential decay", "Linear growth", "Constant"], "answer": "Exponential growth", "solution": "The factor 1.06 is greater than 1."}, {"id": 84, "type": "problem", "category": "Growth and Decay", "page": "19-22", "question": "Classify A=900(0.72)ᵗ.", "options": ["Exponential decay", "Exponential growth", "Linear decay", "Constant"], "answer": "Exponential decay", "solution": "The factor 0.72 is between 0 and 1."}, {"id": 85, "type": "problem", "category": "Exponential Equations", "page": "6,10", "question": "Solve 4ˣ=64.", "options": ["x=3", "x=4", "x=2", "x=16"], "answer": "x=3", "solution": "64=4³, so x=3."}, {"id": 86, "type": "problem", "category": "Power Series", "page": "13", "question": "Using the first four displayed terms, approximate e¹ by 1+1+1/2!+1/3!.", "options": ["2.6667", "2.5000", "2.7183", "3.0000"], "answer": "2.6667", "solution": "1+1+1/2+1/6=2.6667 approximately."}, {"id": 87, "type": "problem", "category": "Power Series", "page": "14-15", "question": "According to the worked example, what is 3e⁻¹ correct to 4 decimal places?", "options": ["1.1036", "0.3679", "3.1036", "1.3591"], "answer": "1.1036", "solution": "The source computes e⁻¹≈0.367858 and then multiplies by 3."}, {"id": 88, "type": "problem", "category": "Exponential Graphs", "page": "17-18", "question": "For y=(1/3)e⁻²ˣ, what value is reported when x=−1.2?", "options": ["3.67", "1.40", "0.05", "6.70"], "answer": "3.67", "solution": "Page 18 reports y=3.67 when x=−1.2."}, {"id": 89, "type": "problem", "category": "Logarithm Evaluation", "page": "37-38", "question": "Evaluate log₃(9).", "options": ["2", "3", "1", "9"], "answer": "2", "solution": "3²=9, so log₃(9)=2."}, {"id": 90, "type": "problem", "category": "Logarithm Evaluation", "page": "39-40", "question": "Evaluate log₁₀(10).", "options": ["1", "10", "0", "−1"], "answer": "1", "solution": "10¹=10, so log₁₀(10)=1."}, {"id": 91, "type": "problem", "category": "Logarithm Evaluation", "page": "41-42", "question": "Evaluate log₁₆(8).", "options": ["3/4", "4/3", "1/2", "2"], "answer": "3/4", "solution": "16ˣ=8 becomes (2⁴)ˣ=2³, so 4x=3 and x=3/4."}, {"id": 92, "type": "problem", "category": "Logarithm Evaluation", "page": "43-44", "question": "Evaluate lg(0.001), where lg means common logarithm.", "options": ["−3", "3", "−2", "0.001"], "answer": "−3", "solution": "0.001=10⁻³, so log₁₀(0.001)=−3."}, {"id": 93, "type": "problem", "category": "Logarithm Evaluation", "page": "45-46", "question": "Evaluate ln(e).", "options": ["1", "e", "0", "−1"], "answer": "1", "solution": "e¹=e, so ln(e)=1."}, {"id": 94, "type": "problem", "category": "Logarithmic Conversion", "page": "29,36", "question": "Convert log₂(8)=3 to exponential form.", "options": ["2³=8", "8³=2", "3²=8", "2⁸=3"], "answer": "2³=8", "solution": "The base 2 stays the base; 3 becomes the exponent and 8 is the result."}, {"id": 95, "type": "problem", "category": "Logarithmic Conversion", "page": "29,36", "question": "Convert 5²=25 to logarithmic form.", "options": ["log₅(25)=2", "log₂(25)=5", "log₂₅(5)=2", "log₅(2)=25"], "answer": "log₅(25)=2", "solution": "The base remains 5, the result 25 becomes the argument, and 2 is the logarithm."}, {"id": 96, "type": "problem", "category": "Logarithmic Properties", "page": "35", "question": "Expand log_b(MN).", "options": ["log_b(M)+log_b(N)", "log_b(M)−log_b(N)", "Nlog_b(M)", "log_b(M+N)"], "answer": "log_b(M)+log_b(N)", "solution": "Use the Product Rule."}, {"id": 97, "type": "problem", "category": "Logarithmic Properties", "page": "35", "question": "Expand log_b(M/N).", "options": ["log_b(M)−log_b(N)", "log_b(M)+log_b(N)", "Nlog_b(M)", "log_b(M−N)"], "answer": "log_b(M)−log_b(N)", "solution": "Use the Quotient Rule."}, {"id": 98, "type": "problem", "category": "Logarithmic Properties", "page": "35", "question": "Expand log_b(x⁴).", "options": ["4log_b(x)", "(log_b(x))⁴", "log_b(x)+4", "log_b(x)/4"], "answer": "4log_b(x)", "solution": "Use the Power Rule and move 4 in front."}, {"id": 99, "type": "problem", "category": "Logarithmic Properties", "page": "35", "question": "Rewrite log₇(20) using common logarithms.", "options": ["log(20)/log(7)", "log(7)/log(20)", "log(20)−log(7)", "log(20)+log(7)"], "answer": "log(20)/log(7)", "solution": "Use the Change of Base Rule."}, {"id": 100, "type": "problem", "category": "Logarithmic Equations", "page": "29,36", "question": "Solve log₂(x)=6.", "options": ["x=64", "x=12", "x=8", "x=36"], "answer": "x=64", "solution": "Convert to exponential form: 2⁶=x, so x=64."}];
+const TYPE_NAMES={mcq:"Multiple Choice",tf:"True or False",identification:"Identification",problem:"Problem Solving"};
+const screens={home:document.getElementById("homeScreen"),reviewer:document.getElementById("reviewerScreen"),setup:document.getElementById("setupScreen"),quiz:document.getElementById("quizScreen"),results:document.getElementById("resultsScreen")};
+const $=id=>document.getElementById(id);
+let state={questions:[],index:0,answers:{},flags:{},checked:{},mode:"exam",remaining:0,total:0,start:0,timerId:null,submitted:false,outcomes:[]};
+
+function topicGroup(q){const c=q.category.toLowerCase();if(c==="laws of exponents")return"exponents";if(c.includes("log"))return"logarithms";return"exponential"}
+function topicName(q){return topicGroup(q)==="exponents"?"Laws of Exponents":topicGroup(q)==="logarithms"?"Logarithms":"Exponential Functions"}
+function show(name){Object.entries(screens).forEach(([k,v])=>v.classList.toggle("hidden",k!==name));window.scrollTo({top:0,behavior:"smooth"})}
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function normalize(v){return String(v??"").toLowerCase().trim().replace(/[−–—]/g,"-").replace(/[.,;:!?]/g,"").replace(/-/g," ").replace(/\s+/g," ").trim()}
+function isCorrect(q,v){if(v===undefined||v===null||String(v).trim()==="")return false;if(q.type==="identification")return q.accepted.some(a=>normalize(a)===normalize(v));return v===q.answer}
+function pool(){const t=$("quizType").value,p=$("quizTopic").value;return BANK.filter(q=>(t==="all"||q.type===t)&&(p==="all"||topicGroup(q)===p))}
+function updateAvailable(){$("availableCount").textContent=pool().length}
+function save(){if(state.submitted||!state.questions.length)return;localStorage.setItem("exp_log_master_quiz",JSON.stringify({...state,timerId:null}));refreshSaved()}
+function refreshSaved(){const has=!!localStorage.getItem("exp_log_master_quiz");$("resumeQuiz").classList.toggle("hidden",!has);$("deleteQuiz").classList.toggle("hidden",!has)}
+
+function start(){
+ let p=pool();if(!p.length){alert("No items match the selected filters.");return}
+ if($("shuffleQuestions").checked)p=shuffle(p);
+ const wanted=$("quizCount").value==="all"?p.length:Number($("quizCount").value);
+ p=p.slice(0,Math.min(wanted,p.length)).map(q=>{const copy={...q};if(copy.options&&$("shuffleChoices").checked)copy.options=shuffle(copy.options);return copy});
+ const mins=Number($("quizTime").value);
+ state={questions:p,index:0,answers:{},flags:{},checked:{},mode:$("quizMode").value,remaining:mins*60,total:mins*60,start:Date.now(),timerId:null,submitted:false,outcomes:[]};
+ $("checkAnswer").classList.toggle("hidden",state.mode!=="practice");show("quiz");buildPalette();render();startTimer();save();
+}
+function resume(){try{const s=JSON.parse(localStorage.getItem("exp_log_master_quiz"));if(!s||!s.questions?.length)throw new Error();state={...s,timerId:null,submitted:false};$("checkAnswer").classList.toggle("hidden",state.mode!=="practice");show("quiz");buildPalette();render();startTimer()}catch(e){localStorage.removeItem("exp_log_master_quiz");refreshSaved();alert("Saved quiz could not be restored.")}}
+function buildPalette(){$("palette").innerHTML=state.questions.map((q,i)=>`<button class="qnav" data-i="${i}">${i+1}</button>`).join("");$("palette").querySelectorAll(".qnav").forEach(b=>b.onclick=()=>{state.index=Number(b.dataset.i);render();save()})}
+function updatePalette(){$("palette").querySelectorAll(".qnav").forEach((b,i)=>{const q=state.questions[i],v=state.answers[q.id];b.classList.toggle("current",i===state.index);b.classList.toggle("answered",v!==undefined&&String(v).trim()!=="");b.classList.toggle("flagged",!!state.flags[q.id])})}
+function updateStats(){$("answeredCount").textContent=state.questions.filter(q=>state.answers[q.id]!==undefined&&String(state.answers[q.id]).trim()!=="").length;$("flaggedCount").textContent=state.questions.filter(q=>state.flags[q.id]).length;updatePalette()}
+
+function render(){
+ const q=state.questions[state.index];if(!q)return;
+ $("questionCount").textContent=`${state.index+1}/${state.questions.length}`;$("typeTag").textContent=TYPE_NAMES[q.type];$("categoryTag").textContent=q.category;$("pageTag").textContent=`PDF p. ${q.page}`;$("questionText").textContent=q.question;$("feedbackArea").innerHTML="";
+ $("flagBtn").textContent=state.flags[q.id]?"⚑ Flagged":"⚐ Flag";$("flagBtn").className="btn "+(state.flags[q.id]?"danger":"warning");$("previousBtn").disabled=state.index===0;$("nextBtn").textContent=state.index===state.questions.length-1?"Finish →":"Next →";
+ const v=state.answers[q.id]??"";
+ if(q.type==="identification"){
+   $("answerArea").innerHTML=`<input id="textAnswer" type="text" autocomplete="off" placeholder="Type the term or answer" value="${esc(v)}"><p class="muted" style="font-size:.8rem">Reasonable hyphen and capitalization differences are accepted.</p>`;
+   const input=$("textAnswer");input.oninput=()=>{state.answers[q.id]=input.value;updateStats();save();if(state.mode==="practice"&&state.checked[q.id])feedback(q)};setTimeout(()=>input.focus(),50);
+ }else{
+   const opts=q.type==="tf"?["True","False"]:q.options;
+   $("answerArea").innerHTML=`<div class="options">${opts.map((o,i)=>`<label class="option ${v===o?"selected":""}" data-v="${esc(o)}"><input type="radio" name="answer" ${v===o?"checked":""}><strong>${String.fromCharCode(65+i)}.</strong><span>${esc(o)}</span></label>`).join("")}</div>`;
+   $("answerArea").querySelectorAll(".option").forEach(el=>el.onclick=()=>{state.answers[q.id]=el.dataset.v;$("answerArea").querySelectorAll(".option").forEach(x=>x.classList.toggle("selected",x===el));updateStats();save();if(state.mode==="practice"&&state.checked[q.id])feedback(q)});
+ }
+ if(state.mode==="practice"&&state.checked[q.id])feedback(q);updateStats();
+}
+function feedback(q){const v=state.answers[q.id],ok=isCorrect(q,v);$("feedbackArea").innerHTML=`<div class="feedback ${ok?"good":"bad"}"><strong>${ok?"Correct!":"Incorrect."}</strong>${ok?"":`<div>Correct answer: <b>${esc(q.answerDisplay||q.answer)}</b></div>`}<div>${esc(q.solution)}</div></div>`;if(q.type!=="identification"){$("answerArea").querySelectorAll(".option").forEach(el=>{el.classList.toggle("correct",el.dataset.v===q.answer);el.classList.toggle("wrong",el.dataset.v===v&&v!==q.answer)})}}
+function checkCurrent(){const q=state.questions[state.index],v=state.answers[q.id];if(v===undefined||String(v).trim()===""){alert("Answer the question first.");return}state.checked[q.id]=true;feedback(q);save()}
+function next(){if(state.index<state.questions.length-1){state.index++;render();save()}else if(confirm("You reached the last question. Submit now?"))submit(false)}
+function startTimer(){clearInterval(state.timerId);if(state.total<=0){$("timer").textContent="No limit";return}timerText();state.timerId=setInterval(()=>{state.remaining--;timerText();save();if(state.remaining<=0){clearInterval(state.timerId);alert("Time is up. The quiz will be submitted.");submit(true)}},1000)}
+function timerText(){if(state.total<=0){$("timer").textContent="No limit";return}const s=Math.max(0,state.remaining);$("timer").textContent=`${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;$("timer").classList.toggle("danger",s<=60)}
+function submit(auto){if(state.submitted)return;const blank=state.questions.filter(q=>state.answers[q.id]===undefined||String(state.answers[q.id]).trim()==="").length;if(!auto&&blank&&!confirm(`You have ${blank} unanswered item(s). Submit anyway?`))return;state.submitted=true;clearInterval(state.timerId);localStorage.removeItem("exp_log_master_quiz");refreshSaved();results()}
+
+function results(){
+ let c=0,b=0;state.outcomes=state.questions.map(q=>{const v=state.answers[q.id],blank=v===undefined||String(v).trim()==="",ok=!blank&&isCorrect(q,v);if(ok)c++;if(blank)b++;return{q,v,blank,ok}});
+ const w=state.questions.length-c-b,pct=Math.round(c/state.questions.length*100),used=state.total>0?state.total-state.remaining:Math.floor((Date.now()-state.start)/1000);
+ $("scoreRing").style.setProperty("--angle",`${pct*3.6}deg`);$("scorePercent").textContent=pct+"%";$("scoreText").textContent=`${c} out of ${state.questions.length} correct`;$("correctResult").textContent=c;$("wrongResult").textContent=w;$("blankResult").textContent=b;$("timeResult").textContent=`${Math.floor(used/60)}m ${used%60}s`;
+ $("scoreMessage").textContent=pct>=90?"Excellent. You are strongly prepared for the covered objectives.":pct>=75?"Good work. Review the missed formulas and conversion steps.":pct>=60?"You know many basics, but need more equation and property practice.":"Study the reviewer first, then retake a shorter practice set.";
+ renderBreakdowns();$("reviewFilter").value="all";renderReview("all");show("results");
+}
+function renderBreakdowns(){
+ function rows(groups){return Object.entries(groups).map(([name,list])=>{const good=list.filter(o=>o.ok).length,p=Math.round(good/list.length*100);return `<div class="break-row"><span>${esc(name)}</span><div class="bar"><i style="width:${p}%"></i></div><strong>${p}%</strong></div>`}).join("")}
+ const byType={},byTopic={};state.outcomes.forEach(o=>{(byType[TYPE_NAMES[o.q.type]]??=[]).push(o);(byTopic[topicName(o.q)]??=[]).push(o)});
+ $("typeBreakdown").innerHTML=rows(byType);$("topicBreakdown").innerHTML=rows(byTopic);
+}
+function renderReview(filter){let rows=state.outcomes;if(filter==="wrong")rows=rows.filter(o=>!o.ok);if(filter==="correct")rows=rows.filter(o=>o.ok);$("reviewList").innerHTML=rows.map((o,i)=>`<div class="review-item ${o.ok?"good":""}"><h4>${i+1}. ${esc(o.q.question)} <span class="tag">${TYPE_NAMES[o.q.type]}</span></h4><p><strong>Your answer:</strong> ${o.blank?"<em>Unanswered</em>":esc(o.v)}</p><p><strong>Correct answer:</strong> ${esc(o.q.answerDisplay||o.q.answer)}</p><p><strong>Explanation:</strong> ${esc(o.q.solution)}</p></div>`).join("")||`<p class="muted">No items match this filter.</p>`}
+
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const target=b.dataset.go;if(target!=="quiz"&&!screens.quiz.classList.contains("hidden")&&!state.submitted){if(!confirm("Leave the current quiz? Your progress will remain saved."))return;clearInterval(state.timerId)}show(target);refreshSaved()});
+["quizType","quizTopic"].forEach(id=>$(id).onchange=updateAvailable);
+$("startQuiz").onclick=start;$("resumeQuiz").onclick=resume;$("deleteQuiz").onclick=()=>{if(confirm("Delete the saved quiz?")){localStorage.removeItem("exp_log_master_quiz");refreshSaved()}};
+$("previousBtn").onclick=()=>{if(state.index>0){state.index--;render();save()}};$("nextBtn").onclick=next;$("checkAnswer").onclick=checkCurrent;
+$("clearAnswer").onclick=()=>{const q=state.questions[state.index];delete state.answers[q.id];delete state.checked[q.id];render();save()};
+$("flagBtn").onclick=()=>{const q=state.questions[state.index];state.flags[q.id]=!state.flags[q.id];render();save()};$("submitQuiz").onclick=()=>submit(false);
+$("reviewFilter").onchange=e=>renderReview(e.target.value);$("showWrong").onclick=()=>{$("reviewFilter").value="wrong";renderReview("wrong");$("reviewList").scrollIntoView({behavior:"smooth"})};
+document.querySelectorAll("[data-check]").forEach(cb=>{cb.checked=localStorage.getItem("exp_log_check_"+cb.dataset.check)==="1";cb.onchange=()=>localStorage.setItem("exp_log_check_"+cb.dataset.check,cb.checked?"1":"0")});
+document.addEventListener("keydown",e=>{if(!screens.quiz.classList.contains("hidden")){if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft"&&state.index>0){state.index--;render();save()}}});
+updateAvailable();refreshSaved();show("home");
+})();
+</script>
+</body>
+</html>
